@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | SmartEnergy</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 70px;
+            background: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #172033;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+
+        /* DASHBOARD */
+
+        .dashboard {
+            padding: 45px 7%;
+        }
+
+        .dashboard-header {
+            margin-bottom: 30px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-header p {
+            color: #697386;
+            line-height: 1.6;
+        }
+
+
+        /* SUMMARY CARDS */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+
+        .card-title {
+            color: #697386;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .card-value {
+            font-size: 30px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .card-small {
+            margin-top: 7px;
+            color: #8a94a6;
+            font-size: 13px;
+        }
+
+
+        /* MAIN GRID */
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+
+        /* PANELS */
+
+        .panel {
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+
+        .panel h2 {
+            margin-bottom: 25px;
+        }
+
+
+        /* CONSUMPTION BARS */
+
+        .usage-bar {
+            margin-bottom: 22px;
+        }
+
+        .usage-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .usage-info span:first-child {
+            font-weight: 500;
+        }
+
+        .bar-background {
+            width: 100%;
+            height: 12px;
+            background: #e8edf5;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .bar {
+            height: 100%;
+            background: #2563eb;
+            border-radius: 20px;
+        }
+
+
+        /* APPLIANCE LIST */
+
+        .appliance-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .appliance-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 15px;
+
+            background: #f7f9fc;
+
+            border-radius: 10px;
+        }
+
+        .appliance-name {
+            font-weight: bold;
+        }
+
+        .appliance-details {
+            color: #697386;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .voltage {
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+
+        /* TIP */
+
+        .tip {
+            margin-top: 25px;
+            padding: 18px;
+            background: #eef5ff;
+            border-radius: 10px;
+            line-height: 1.6;
+        }
+
+
+        /* CHART */
+
+        .chart-container {
+            margin-top: 30px;
+        }
+
+        .chart-title {
+            margin-bottom: 20px;
+        }
+
+        .chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 18px;
+
+            height: 260px;
+
+            padding: 20px;
+
+            background: #f8faff;
+
+            border-radius: 12px;
+
+            overflow-x: auto;
+        }
+
+        .chart-column {
+            min-width: 60px;
+
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: flex-end;
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .chart-value {
+            font-size: 11px;
+            color: #697386;
+        }
+
+        .chart-bar {
+            width: 35px;
+
+            min-height: 5px;
+
+            background: #2563eb;
+
+            border-radius: 6px 6px 0 0;
+
+            transition: height 0.5s ease;
+        }
+
+        .chart-label {
+            font-size: 11px;
+
+            color: #172033;
+
+            text-align: center;
+
+            max-width: 70px;
+        }
+
+
+        /* LOADING */
+
+        .loading {
+            color: #697386;
+            text-align: center;
+            padding: 20px;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 40px;
+            padding: 25px;
+
+            text-align: center;
+
+            background: #172033;
+            color: white;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1000px) {
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                height: auto;
+
+                padding: 20px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .dashboard-header h1 {
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            ⚡ SmartEnergy
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="calculator.html">
+                Calculator
+            </a>
+            <a href="prediction.html">
+                Prediction
+            </a>
+            <a href="bill.html">
+                Bill
+            </a>
+            <a href="savings.html">
+                Savings
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- DASHBOARD -->
+
+    <main class="dashboard">
+
+
+        <div class="dashboard-header">
+
+            <h1>
+                Electricity Dashboard
+            </h1>
+
+            <p>
+                Monitor appliance usage, electricity consumption,
+                estimated cost and energy-saving opportunities.
+            </p>
+
+        </div>
+
+
+
+        <!-- SUMMARY CARDS -->
+
+        <section class="cards">
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    Total Consumption
+                </div>
+
+                <div
+                    class="card-value"
+                    id="totalConsumption"
+                >
+                    Loading...
+                </div>
+
+                <div class="card-small">
+                    Estimated monthly usage
+                </div>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    Estimated Cost
+                </div>
+
+                <div
+                    class="card-value"
+                    id="estimatedCost"
+                >
+                    Loading...
+                </div>
+
+                <div class="card-small">
+                    At ₹8 per kWh
+                </div>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    Average Voltage
+                </div>
+
+                <div
+                    class="card-value"
+                    id="averageVoltage"
+                >
+                    Loading...
+                </div>
+
+                <div class="card-small">
+                    Household supply
+                </div>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    Appliances
+                </div>
+
+                <div
+                    class="card-value"
+                    id="activeAppliances"
+                >
+                    Loading...
+                </div>
+
+                <div class="card-small">
+                    Available appliances
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- MAIN CONTENT -->
+
+        <section class="main-grid">
+
+
+            <!-- CONSUMPTION -->
+
+            <div class="panel">
+
+                <h2>
+                    Monthly Consumption by Appliance
+                </h2>
+
+
+                <div
+                    id="usageContainer"
+                >
+
+                    <div class="loading">
+                        Loading consumption data...
+                    </div>
+
+                </div>
+
+
+
+                <!-- CHART -->
+
+                <div class="chart-container">
+
+                    <h2 class="chart-title">
+                        Energy Consumption Chart
+                    </h2>
+
+
+                    <div
+                        class="chart"
+                        id="consumptionChart"
+                    >
+
+                        <div class="loading">
+                            Loading chart...
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- APPLIANCE DETAILS -->
+
+            <div class="panel">
+
+                <h2>
+                    Appliance Details
+                </h2>
+
+
+                <div
+                    class="appliance-list"
+                    id="applianceList"
+                >
+
+                    <div class="loading">
+                        Loading appliances...
+                    </div>
+
+                </div>
+
+
+                <div class="tip">
+
+                    💡
+
+                    <strong>
+                        Energy Saving Tip:
+                    </strong>
+
+                    High-power appliances consume more
+                    electricity. Reducing their usage hours
+                    can significantly lower your monthly bill.
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 SmartEnergy |
+            Smart Electricity Consumption & Cost Optimizer
+        </p>
+
+    </footer>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        const API_URL =
+            "http://127.0.0.1:8000";
+
+
+        /*
+        Default daily usage hours.
+
+        These are demonstration values used
+        until the user enters their actual
+        appliance usage.
+        */
+
+        const usageHours = {
+
+            "air_conditioner": 6,
+
+            "fan": 8,
+
+            "refrigerator": 24,
+
+            "led_light": 6,
+
+            "television": 5,
+
+            "computer": 6,
+
+            "iron": 1,
+
+            "washing_machine": 1
+
+        };
+
+
+        const ELECTRICITY_RATE = 8;
+
+        const DAYS_PER_MONTH = 30;
+
+
+
+        // ==========================================
+        // LOAD DASHBOARD
+        // ==========================================
+
+        async function loadDashboard() {
+
+            try {
+
+
+                const response =
+                    await fetch(
+                        `${API_URL}/appliances`
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load appliances"
+                    );
+
+                }
+
+
+                const appliances =
+                    await response.json();
+
+
+                console.log(
+                    "Dashboard API data:",
+                    appliances
+                );
+
+
+                calculateDashboard(
+                    appliances
+                );
+
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Dashboard Error:",
+                    error
+                );
+
+
+                document.getElementById(
+                    "usageContainer"
+                ).innerHTML = `
+
+                    <div class="loading">
+
+                        Unable to load appliance data.
+
+                        Make sure FastAPI is running.
+
+                    </div>
+
+                `;
+
+
+                document.getElementById(
+                    "applianceList"
+                ).innerHTML = `
+
+                    <div class="loading">
+
+                        Unable to connect to API.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+
+        // ==========================================
+        // CALCULATE DASHBOARD DATA
+        // ==========================================
+
+        function calculateDashboard(
+            appliances
+        ) {
+
+
+            let totalMonthlyConsumption = 0;
+
+            let totalVoltage = 0;
+
+            let applianceCount = 0;
+
+
+            const consumptionData = [];
+
+
+
+            // ======================================
+            // LOOP THROUGH APPLIANCES
+            // ======================================
+
+            for (
+                const key in appliances
+            ) {
+
+
+                const appliance =
+                    appliances[key];
+
+
+                const powerWatts =
+                    Number(
+                        appliance.power_watts
+                    );
+
+
+                const voltage =
+                    Number(
+                        appliance.voltage
+                    );
+
+
+                const hours =
+                    usageHours[key] || 4;
+
+
+                // Monthly consumption
+
+                const monthlyKwh =
+                    (
+                        powerWatts *
+                        hours *
+                        DAYS_PER_MONTH
+                    ) / 1000;
+
+
+                totalMonthlyConsumption +=
+                    monthlyKwh;
+
+
+                totalVoltage +=
+                    voltage;
+
+
+                applianceCount++;
+
+
+                consumptionData.push({
+
+                    name:
+                        appliance.name,
+
+                    power:
+                        powerWatts,
+
+                    voltage:
+                        voltage,
+
+                    hours:
+                        hours,
+
+                    monthlyKwh:
+                        monthlyKwh
+
+                });
+
+            }
+
+
+
+            // ======================================
+            // AVERAGE VOLTAGE
+            // ======================================
+
+            const averageVoltage =
+                applianceCount > 0
+                    ? totalVoltage / applianceCount
+                    : 0;
+
+
+
+            // ======================================
+            // TOTAL COST
+            // ======================================
+
+            const estimatedCost =
+                totalMonthlyConsumption *
+                ELECTRICITY_RATE;
+
+
+
+            // ======================================
+            // UPDATE SUMMARY CARDS
+            // ======================================
+
+            document.getElementById(
+                "totalConsumption"
+            ).textContent =
+                `${totalMonthlyConsumption.toFixed(2)} kWh`;
+
+
+            document.getElementById(
+                "estimatedCost"
+            ).textContent =
+                `₹${estimatedCost.toFixed(2)}`;
+
+
+            document.getElementById(
+                "averageVoltage"
+            ).textContent =
+                `${averageVoltage.toFixed(0)} V`;
+
+
+            document.getElementById(
+                "activeAppliances"
+            ).textContent =
+                applianceCount;
+
+
+
+            // ======================================
+            // DISPLAY CONSUMPTION
+            // ======================================
+
+            displayConsumption(
+                consumptionData
+            );
+
+
+
+            // ======================================
+            // DISPLAY APPLIANCES
+            // ======================================
+
+            displayAppliances(
+                consumptionData
+            );
+
+
+
+            // ======================================
+            // DISPLAY CHART
+            // ======================================
+
+            displayChart(
+                consumptionData
+            );
+
+        }
+
+
+
+        // ==========================================
+        // DISPLAY CONSUMPTION BARS
+        // ==========================================
+
+        function displayConsumption(
+            data
+        ) {
+
+
+            const container =
+                document.getElementById(
+                    "usageContainer"
+                );
+
+
+            container.innerHTML = "";
+
+
+            const maxConsumption =
+                Math.max(
+                    ...data.map(
+                        item =>
+                            item.monthlyKwh
+                    )
+                );
+
+
+            data.sort(
+                (a, b) =>
+                    b.monthlyKwh -
+                    a.monthlyKwh
+            );
+
+
+            data.forEach(
+                item => {
+
+
+                    const percentage =
+                        maxConsumption > 0
+                            ? (
+                                item.monthlyKwh /
+                                maxConsumption
+                            ) * 100
+                            : 0;
+
+
+                    const div =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    div.className =
+                        "usage-bar";
+
+
+                    div.innerHTML = `
+
+                        <div class="usage-info">
+
+                            <span>
+                                ${item.name}
+                            </span>
+
+                            <span>
+                                ${item.monthlyKwh.toFixed(2)} kWh
+                            </span>
+
+                        </div>
+
+
+                        <div class="bar-background">
+
+                            <div
+                                class="bar"
+                                style="width:${percentage}%"
+                            ></div>
+
+                        </div>
+
+                    `;
+
+
+                    container.appendChild(
+                        div
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        // ==========================================
+        // DISPLAY APPLIANCES
+        // ==========================================
+
+        function displayAppliances(
+            data
+        ) {
+
+
+            const container =
+                document.getElementById(
+                    "applianceList"
+                );
+
+
+            container.innerHTML = "";
+
+
+            data.forEach(
+                item => {
+
+
+                    const div =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    div.className =
+                        "appliance-item";
+
+
+                    div.innerHTML = `
+
+                        <div>
+
+                            <div class="appliance-name">
+
+                                ⚡ ${item.name}
+
+                            </div>
+
+
+                            <div class="appliance-details">
+
+                                ${item.power} W
+                                •
+                                ${item.hours} hours/day
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="voltage">
+
+                            ${item.voltage} V
+
+                        </div>
+
+                    `;
+
+
+                    container.appendChild(
+                        div
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        // ==========================================
+        // DISPLAY CHART
+        // ==========================================
+
+        function displayChart(
+            data
+        ) {
+
+
+            const chart =
+                document.getElementById(
+                    "consumptionChart"
+                );
+
+
+            chart.innerHTML = "";
+
+
+            const maxValue =
+                Math.max(
+                    ...data.map(
+                        item =>
+                            item.monthlyKwh
+                    )
+                );
+
+
+            data.forEach(
+                item => {
+
+
+                    const column =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    column.className =
+                        "chart-column";
+
+
+                    const percentage =
+                        maxValue > 0
+                            ? (
+                                item.monthlyKwh /
+                                maxValue
+                            ) * 100
+                            : 0;
+
+
+                    column.innerHTML = `
+
+                        <div class="chart-value">
+
+                            ${item.monthlyKwh.toFixed(1)}
+
+                        </div>
+
+
+                        <div
+                            class="chart-bar"
+                            style="height:${Math.max(
+                                percentage,
+                                3
+                            )}%"
+                        ></div>
+
+
+                        <div class="chart-label">
+
+                            ${item.name}
+
+                        </div>
+
+                    `;
+
+
+                    chart.appendChild(
+                        column
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        // ==========================================
+        // START DASHBOARD
+        // ==========================================
+
+        loadDashboard();
+
+    </script>
+
+
+</body>
+
+</html>

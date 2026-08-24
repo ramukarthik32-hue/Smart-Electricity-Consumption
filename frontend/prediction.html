@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prediction | SmartEnergy</title>
+
+    <link rel="stylesheet" href="prediction.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            ⚡ SmartEnergy
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="calculator.html">Calculator</a>
+            <a href="prediction.html" class="active">Prediction</a>
+            <a href="bill.html">Bill</a>
+            <a href="savings.html">Savings</a>
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+        <div class="page-header">
+
+            <h1>Electricity Consumption Prediction</h1>
+
+            <p>
+                Enter the environmental conditions and lighting usage
+                to predict electricity consumption using our AI model.
+            </p>
+
+        </div>
+
+
+        <!-- ================= FORM ================= -->
+
+        <form id="predictionForm">
+
+            <div class="form-grid">
+
+
+                <!-- LIGHTS -->
+
+                <div class="input-group">
+                    <label for="lights">Lights</label>
+                    <input
+                        type="number"
+                        id="lights"
+                        step="any"
+                        value="10"
+                        required
+                    >
+                </div>
+
+
+                <!-- TEMPERATURE / HUMIDITY -->
+
+                <div class="input-group">
+                    <label for="T1">Temperature T1 (°C)</label>
+                    <input type="number" id="T1" step="any" value="20" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="RH_1">Humidity RH1 (%)</label>
+                    <input type="number" id="RH_1" step="any" value="40" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="T2">Temperature T2 (°C)</label>
+                    <input type="number" id="T2" step="any" value="20" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="RH_2">Humidity RH2 (%)</label>
+                    <input type="number" id="RH_2" step="any" value="40" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="T3">Temperature T3 (°C)</label>
+                    <input type="number" id="T3" step="any" value="20" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="RH_3">Humidity RH3 (%)</label>
+                    <input type="number" id="RH_3" step="any" value="40" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="T4">Temperature T4 (°C)</label>
+                    <input type="number" id="T4" step="any" value="20" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="RH_4">Humidity RH4 (%)</label>
+                    <input type="number" id="RH_4" step="any" value="40" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="T5">Temperature T5 (°C)</label>
+                    <input type="number" id="T5" step="any" value="20" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="RH_5">Humidity RH5 (%)</label>
+                    <input type="number" id="RH_5" step="any" value="40" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="T6">Temperature T6 (°C)</label>
+                    <input type="number" id="T6" step="any" value="20" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="RH_6">Humidity RH6 (%)</label>
+                    <input type="number" id="RH_6" step="any" value="40" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="T7">Temperature T7 (°C)</label>
+                    <input type="number" id="T7" step="any" value="20" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="RH_7">Humidity RH7 (%)</label>
+                    <input type="number" id="RH_7" step="any" value="40" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="T8">Temperature T8 (°C)</label>
+                    <input type="number" id="T8" step="any" value="20" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="RH_8">Humidity RH8 (%)</label>
+                    <input type="number" id="RH_8" step="any" value="40" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="T9">Temperature T9 (°C)</label>
+                    <input type="number" id="T9" step="any" value="20" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="RH_9">Humidity RH9 (%)</label>
+                    <input type="number" id="RH_9" step="any" value="40" required>
+                </div>
+
+
+                <!-- OUTDOOR CONDITIONS -->
+
+                <div class="input-group">
+                    <label for="T_out">Outdoor Temperature (°C)</label>
+                    <input type="number" id="T_out" step="any" value="10" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="Press_mm_hg">Pressure (mm Hg)</label>
+                    <input type="number" id="Press_mm_hg" step="any" value="750" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="RH_out">Outdoor Humidity (%)</label>
+                    <input type="number" id="RH_out" step="any" value="60" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="Windspeed">Wind Speed</label>
+                    <input type="number" id="Windspeed" step="any" value="3" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="Visibility">Visibility</label>
+                    <input type="number" id="Visibility" step="any" value="40" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="Tdewpoint">Dew Point Temperature (°C)</label>
+                    <input type="number" id="Tdewpoint" step="any" value="5" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="rv1">Random Variable 1</label>
+                    <input type="number" id="rv1" step="any" value="0.5" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="rv2">Random Variable 2</label>
+                    <input type="number" id="rv2" step="any" value="0.5" required>
+                </div>
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <button type="submit" class="predict-btn">
+                ⚡ Predict Consumption
+            </button>
+
+        </form>
+
+
+        <!-- ================= RESULT ================= -->
+
+        <div id="resultCard" class="result-card hidden">
+
+            <div class="result-icon">
+                ⚡
+            </div>
+
+            <h2>Prediction Result</h2>
+
+            <p class="result-label">
+                Predicted Electricity Consumption
+            </p>
+
+            <div id="predictionValue" class="prediction-value">
+                0 Wh
+            </div>
+
+            <p class="result-description">
+                This value is predicted by the Extra Trees Machine Learning model.
+            </p>
+
+        </div>
+
+
+        <!-- ================= ERROR ================= -->
+
+        <div id="errorMessage" class="error-message hidden">
+        </div>
+
+    </main>
+
+
+    <script src="prediction.js"></script>
+
+</body>
+
+</html>

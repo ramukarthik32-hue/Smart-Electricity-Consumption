@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartEnergy - Electricity Bill</title>
+
+    <link rel="stylesheet" href="bill.css">
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>⚡ SmartEnergy</h1>
+
+        <p>Electricity Bill & Payment</p>
+
+    </header>
+
+
+
+    <main>
+
+
+        <!-- BILL SEARCH -->
+
+        <section class="card">
+
+            <h2>
+                🔎 Check Your Electricity Bill
+            </h2>
+
+            <p>
+                Enter your electricity bill number
+                to view your monthly electricity details.
+            </p>
+
+
+            <div class="input-group">
+
+                <label for="billNumber">
+                    Electricity Bill Number
+                </label>
+
+                <input
+                    type="text"
+                    id="billNumber"
+                    placeholder="Example: BILL1001"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <button
+                id="fetchBillBtn"
+                type="button"
+            >
+                View Bill
+            </button>
+
+
+            <p
+                id="errorMessage"
+                class="error"
+            ></p>
+
+        </section>
+
+
+
+        <!-- BILL DETAILS -->
+
+        <section
+            class="card"
+            id="billDetails"
+            style="display: none;"
+        >
+
+            <h2>
+                🧾 Electricity Bill Details
+            </h2>
+
+
+            <div class="details">
+
+
+                <div>
+
+                    <span>
+                        Bill Number
+                    </span>
+
+                    <strong id="displayBillNumber">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div>
+
+                    <span>
+                        Billing Month
+                    </span>
+
+                    <strong id="billingMonth">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <!-- START DATE -->
+
+                <div>
+
+                    <span>
+                        Payment Starting Date
+                    </span>
+
+                    <strong id="paymentStartDate">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <!-- END DATE -->
+
+                <div>
+
+                    <span>
+                        Payment Ending Date
+                    </span>
+
+                    <strong id="paymentEndDate">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div>
+
+                    <span>
+                        Monthly Electricity Consumption
+                    </span>
+
+                    <strong id="monthlyConsumption">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div>
+
+                    <span>
+                        Average Daily Consumption
+                    </span>
+
+                    <strong id="dailyConsumption">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div>
+
+                    <span>
+                        Electricity Rate
+                    </span>
+
+                    <strong id="electricityRate">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div class="total">
+
+                    <span>
+                        Total Electricity Bill
+                    </span>
+
+                    <strong id="totalBill">
+                        -
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- PAYMENT -->
+
+            <div class="payment-section">
+
+                <h2>
+                    💳 Pay Electricity Bill
+                </h2>
+
+                <p>
+                    Select your preferred payment method.
+                </p>
+
+
+                <div class="payment-methods">
+
+
+                    <button
+                        type="button"
+                        class="payment-btn"
+                        data-method="PhonePe / UPI"
+                    >
+                        📱 PhonePe / UPI
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="payment-btn"
+                        data-method="Google Pay / UPI"
+                    >
+                        💳 Google Pay / UPI
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="payment-btn"
+                        data-method="Debit Card"
+                    >
+                        💳 Debit Card
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="payment-btn"
+                        data-method="Credit Card"
+                    >
+                        💳 Credit Card
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="payment-btn"
+                        data-method="Net Banking"
+                    >
+                        🏦 Net Banking
+                    </button>
+
+
+                </div>
+
+
+                <button
+                    id="payBtn"
+                    class="pay-btn"
+                    type="button"
+                    disabled
+                >
+                    Pay Bill
+                </button>
+
+
+                <p
+                    id="paymentMessage"
+                    class="payment-message"
+                ></p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- RECEIPT -->
+
+        <section
+            class="card"
+            id="receipt"
+            style="display: none;"
+        >
+
+            <h2>
+                ✅ Payment Successful
+            </h2>
+
+
+            <p>
+                Your electricity bill has been paid successfully.
+            </p>
+
+
+            <div id="receiptContent">
+
+                <h3>
+                    ⚡ SMARTENERGY
+                </h3>
+
+                <p>
+                    Electricity Bill Payment Receipt
+                </p>
+
+                <hr>
+
+
+                <p>
+                    <strong>Bill Number:</strong>
+
+                    <span id="receiptBillNumber">
+                        -
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Billing Month:</strong>
+
+                    <span id="receiptBillingMonth">
+                        -
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Payment Starting Date:</strong>
+
+                    <span id="receiptStartDate">
+                        -
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Payment Ending Date:</strong>
+
+                    <span id="receiptEndDate">
+                        -
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Consumption:</strong>
+
+                    <span id="receiptConsumption">
+                        -
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Electricity Rate:</strong>
+
+                    <span id="receiptRate">
+                        -
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Amount Paid:</strong>
+
+                    <span id="receiptAmount">
+                        -
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Payment Method:</strong>
+
+                    <span id="receiptMethod">
+                        -
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Transaction ID:</strong>
+
+                    <span id="transactionId">
+                        -
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Payment Status:</strong>
+
+                    <span>
+                        SUCCESS
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Payment Date:</strong>
+
+                    <span id="paymentDate">
+                        -
+                    </span>
+                </p>
+
+
+                <hr>
+
+
+                <p>
+                    Thank you for using SmartEnergy.
+                </p>
+
+            </div>
+
+
+            <!-- RECEIPT BUTTONS -->
+
+            <div class="receipt-buttons">
+
+                <button
+                    id="printBtn"
+                    type="button"
+                >
+                    🖨 Print Receipt
+                </button>
+
+
+                <button
+                    id="downloadBtn"
+                    type="button"
+                >
+                    ⬇ Download Receipt
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<script src="bill.js"></script>
+
+</body>
+
+</html>

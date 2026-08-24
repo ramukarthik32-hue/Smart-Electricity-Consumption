@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Energy Savings | SmartEnergy</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 70px;
+            background: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #172033;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+
+        /* PAGE */
+
+        .savings-page {
+            padding: 55px 7%;
+            min-height: 750px;
+        }
+
+        .header {
+            text-align: center;
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .small-title {
+            color: #2563eb;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .header h1 span {
+            color: #2563eb;
+        }
+
+        .header p {
+            color: #697386;
+            line-height: 1.6;
+        }
+
+
+        /* CARD */
+
+        .savings-card {
+            max-width: 850px;
+            margin: 40px auto;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 15px;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #d5dbea;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+
+            border-color: #2563eb;
+        }
+
+        .form-row {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 20px;
+        }
+
+
+        /* BUTTON */
+
+        .calculate-btn {
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .calculate-btn:hover {
+            background: #1d4ed8;
+        }
+
+
+        /* RESULT */
+
+        .result {
+            display: none;
+
+            margin-top: 35px;
+        }
+
+        .result h2 {
+            text-align: center;
+
+            margin-bottom: 25px;
+        }
+
+        .result-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+        .result-box {
+            background: #f7f9fc;
+
+            padding: 22px;
+
+            border-radius: 10px;
+
+            text-align: center;
+        }
+
+        .result-box span {
+            display: block;
+
+            color: #697386;
+
+            margin-bottom: 8px;
+        }
+
+        .result-box strong {
+            font-size: 24px;
+
+            color: #2563eb;
+        }
+
+
+        /* SAVINGS HIGHLIGHT */
+
+        .saving-highlight {
+
+            margin-top: 25px;
+
+            padding: 25px;
+
+            background: #eef5ff;
+
+            border-radius: 12px;
+
+            text-align: center;
+        }
+
+        .saving-highlight h3 {
+            margin-bottom: 10px;
+        }
+
+        .saving-amount {
+            font-size: 34px;
+
+            font-weight: bold;
+
+            color: #16a34a;
+        }
+
+
+        /* TIPS */
+
+        .tips {
+
+            max-width: 850px;
+
+            margin: 30px auto;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        }
+
+        .tips h2 {
+            margin-bottom: 20px;
+        }
+
+        .tips ul {
+            padding-left: 20px;
+        }
+
+        .tips li {
+            margin-bottom: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            padding: 25px;
+
+            text-align: center;
+
+            background: #172033;
+
+            color: white;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .form-row,
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .savings-card {
+                padding: 25px;
+            }
+
+            .header h1 {
+                font-size: 32px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            ⚡ SmartEnergy
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="calculator.html">
+                Calculator
+            </a>
+            <a href="prediction.html">
+                Prediction
+            </a>
+            <a href="bill.html">
+                Bill
+            </a>
+            <a href="savings.html">
+                Savings
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- SAVINGS PAGE -->
+
+    <main class="savings-page">
+
+
+        <div class="header">
+
+            <p class="small-title">
+                ENERGY SAVING ASSISTANT
+            </p>
+
+            <h1>
+                Save Electricity &
+                <span>Save Money</span>
+            </h1>
+
+            <p>
+                Compare your current appliance usage with
+                recommended usage and discover how much
+                money you can save every month.
+            </p>
+
+        </div>
+
+
+
+        <!-- SAVINGS CALCULATOR -->
+
+        <div class="savings-card">
+
+
+            <form id="savingsForm">
+
+
+                <div class="form-group">
+
+                    <label for="appliance">
+
+                        Select Appliance
+
+                    </label>
+
+                    <select
+                        id="appliance"
+                        required
+                    >
+
+                        <option value="">
+
+                            Loading appliances...
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label for="currentHours">
+
+                            Current Hours Per Day
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="currentHours"
+                            placeholder="Example: 8"
+                            min="0.5"
+                            max="24"
+                            step="0.5"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="recommendedHours">
+
+                            Recommended Hours Per Day
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="recommendedHours"
+                            placeholder="Example: 6"
+                            min="0.5"
+                            max="24"
+                            step="0.5"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label for="days">
+
+                            Days Per Month
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="days"
+                            value="30"
+                            min="1"
+                            max="31"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="rate">
+
+                            Electricity Rate (₹ / kWh)
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="rate"
+                            value="8"
+                            min="0"
+                            step="0.1"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="calculate-btn"
+                >
+
+                    Calculate My Savings
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- RESULT -->
+
+            <div
+                class="result"
+                id="result"
+            >
+
+                <h2>
+                    Your Savings Analysis
+                </h2>
+
+
+                <div class="result-grid">
+
+
+                    <div class="result-box">
+
+                        <span>
+                            Current Monthly Cost
+                        </span>
+
+                        <strong id="currentCost">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="result-box">
+
+                        <span>
+                            Recommended Monthly Cost
+                        </span>
+
+                        <strong id="recommendedCost">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="result-box">
+
+                        <span>
+                            Current Consumption
+                        </span>
+
+                        <strong id="currentConsumption">
+                            0 kWh
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="result-box">
+
+                        <span>
+                            Recommended Consumption
+                        </span>
+
+                        <strong id="recommendedConsumption">
+                            0 kWh
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="saving-highlight">
+
+                    <h3>
+                        💰 Estimated Monthly Savings
+                    </h3>
+
+                    <div
+                        class="saving-amount"
+                        id="savingAmount"
+                    >
+                        ₹0
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ENERGY TIPS -->
+
+        <div class="tips">
+
+            <h2>
+                💡 Energy Saving Tips
+            </h2>
+
+            <ul>
+
+                <li>
+                    Turn off appliances when they are
+                    not being used.
+                </li>
+
+                <li>
+                    Reduce unnecessary AC usage because
+                    ACs are high-power appliances.
+                </li>
+
+                <li>
+                    Use LED lights instead of traditional
+                    high-power bulbs.
+                </li>
+
+                <li>
+                    Avoid keeping electronic devices
+                    on standby for long periods.
+                </li>
+
+                <li>
+                    Compare appliance usage regularly
+                    to identify opportunities to save money.
+                </li>
+
+            </ul>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 SmartEnergy |
+            Smart Electricity Consumption & Cost Optimizer
+        </p>
+
+    </footer>
+
+
+
+    <script src="savings.js"></script>
+
+</body>
+
+</html>
