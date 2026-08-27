@@ -1,27 +1,30 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from appliances import router as appliance_router
+from backend.appliances import router as appliance_router
 
 import joblib
 import pandas as pd
 from pathlib import Path
+from huggingface_hub import hf_hub_download
 
 
 # =========================================================
 # LOAD ML MODEL
 # =========================================================
 
-BASE_DIR = Path(__file__).resolve().parent
-
-MODEL_PATH = (
-    BASE_DIR.parent
-    / "models"
-    / "electricity_consumption_model.pkl"
+MODEL_FILE = hf_hub_download(
+    repo_id="KARTEEKRAMU/Smart-electricity-consumption",
+    filename="electricity_consumption_model.pkl"
 )
 
-model = joblib.load(MODEL_PATH)
+FEATURE_FILE = hf_hub_download(
+    repo_id="KARTEEKRAMU/Smart-electricity-consumption",
+    filename="feature_columns.pkl"
+)
 
+model = joblib.load(MODEL_FILE)
+feature_columns = joblib.load(FEATURE_FILE)
 
 # =========================================================
 # FASTAPI APP
