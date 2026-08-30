@@ -1,30 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+
 from backend.appliances import router as appliance_router
 
-import joblib
-import pandas as pd
 from pathlib import Path
 from huggingface_hub import hf_hub_download
+import joblib
 
-
-# =========================================================
-# LOAD ML MODEL
-# =========================================================
-
-MODEL_FILE = hf_hub_download(
-    repo_id="KARTEEKRAMU/Smart-electricity-consumption",
-    filename="electricity_consumption_model.pkl"
-)
-
-FEATURE_FILE = hf_hub_download(
-    repo_id="KARTEEKRAMU/Smart-electricity-consumption",
-    filename="feature_columns.pkl"
-)
-
-model = joblib.load(MODEL_FILE)
-feature_columns = joblib.load(FEATURE_FILE)
 
 # =========================================================
 # FASTAPI APP
@@ -74,7 +57,6 @@ def home():
 # =========================================================
 
 class ElectricityRequest(BaseModel):
-
     appliance_name: str
     power_watts: float
     hours_per_day: float
@@ -158,11 +140,39 @@ class PredictionRequest(BaseModel):
 
 
 # =========================================================
+# ML MODEL LOADER
+# =========================================================
+
+_model = None
+
+
+def get_model():
+
+    global _model
+
+    if _model is None:
+
+        MODEL_FILE = hf_hub_download(
+            repo_id="KARTEEKRAMU/Smart-electricity-consumption",
+            filename="electricity_consumption_model.pkl"
+        )
+
+        _model = joblib.load(MODEL_FILE)
+
+    return _model
+
+
+# =========================================================
 # ML PREDICTION
 # =========================================================
 
 @app.post("/predict")
 def predict_consumption(data: PredictionRequest):
+
+    # Import pandas only when prediction is requested
+    import pandas as pd
+
+    model = get_model()
 
     input_data = pd.DataFrame([{
 
@@ -196,17 +206,11 @@ def predict_consumption(data: PredictionRequest):
         "RH_9": data.RH_9,
 
         "T_out": data.T_out,
-
         "Press_mm_hg": data.Press_mm_hg,
-
         "RH_out": data.RH_out,
-
         "Windspeed": data.Windspeed,
-
         "Visibility": data.Visibility,
-
         "Tdewpoint": data.Tdewpoint,
-
         "rv1": data.rv1,
         "rv2": data.rv2
     }])
@@ -230,76 +234,46 @@ def get_bill(bill_number: str):
     bills = {
 
         "BILL1001": {
-
             "bill_number": "BILL1001",
-
             "billing_month": "August 2026",
-
             "payment_start_date": "01-Aug-2026",
-
             "payment_end_date": "31-Aug-2026",
-
             "monthly_consumption_kwh": 397.02,
-
             "daily_average_kwh": 12.81,
-
             "electricity_rate": 8.00,
-
             "total_bill": 3176.16
         },
 
         "BILL1002": {
-
             "bill_number": "BILL1002",
-
             "billing_month": "August 2026",
-
             "payment_start_date": "01-Aug-2026",
-
             "payment_end_date": "31-Aug-2026",
-
             "monthly_consumption_kwh": 285.50,
-
             "daily_average_kwh": 9.21,
-
             "electricity_rate": 8.00,
-
             "total_bill": 2284.00
         },
 
         "BILL1003": {
-
             "bill_number": "BILL1003",
-
             "billing_month": "August 2026",
-
             "payment_start_date": "01-Aug-2026",
-
             "payment_end_date": "31-Aug-2026",
-
             "monthly_consumption_kwh": 450.75,
-
             "daily_average_kwh": 14.54,
-
             "electricity_rate": 8.00,
-
             "total_bill": 3606.00
         }
     }
 
-
-    bill = bills.get(
-        bill_number.upper()
-    )
-
+    bill = bills.get(bill_number.upper())
 
     if bill is None:
-
         return {
             "status": "error",
             "message": "Electricity bill not found"
         }
-
 
     return {
         "status": "success",
