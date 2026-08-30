@@ -99,18 +99,10 @@ Visibility
 Tdewpoint
 rv1
 rv2  
-🚀 Live Demo
+## 🚀 Live Demo
 
-🌐 "Open Smart Electricity Consumption Website" (https://smart-electricity-consumption-frontend2.onrender.com/)
+[🌐 Open Smart Electricity Consumption Website](https://smart-electricity-consumption-frontend2.onrender.com/)
 
-🔗 Backend API
+[🧾 Open Electricity Bill](https://smart-electricity-consumption-frontend2.onrender.com/bill.html)
 
-"Open FastAPI Backend" (https://smart-electricity-consumption-2.onrender.com/)
-
-📚 API Documentation
-
-"Open Swagger API Docs" (https://smart-electricity-consumption-2.onrender.com/docs)
-
-🧾 Electricity Bill
-
-"Open Electricity Bill Page" (https://smart-electricity-consumption-frontend2.onrender.com/bill.html)
+[📚 Open API Documentation](https://smart-electricity-consumption-2.onrender.com/docs)
