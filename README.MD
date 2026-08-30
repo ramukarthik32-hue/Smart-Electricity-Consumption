@@ -50,6 +50,10 @@ Calculates:
 - Monthly electricity cost
 
 The calculation is based on appliance power, usage hours, number of days, and electricity rate.
+## Live Demo
+
+[Open Website](https://smart-electricity-consumption-frontend2.onrender.com/)
+
 
 ### 🤖 Prediction
 
@@ -99,6 +103,3 @@ Visibility
 Tdewpoint
 rv1
 rv2  
-## Live Demo
-
-[Open Website](https://smart-electricity-consumption-frontend2.onrender.com/)
